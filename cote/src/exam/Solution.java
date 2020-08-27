@@ -138,4 +138,17 @@ public class Solution {
         int answer = point[0] + point[1] + point[2];
         return answer;
     }
+
+    
+    // public int solution3(String dartResult){
+    //     String[] reg = {"[0-9]{1,2}", "[S|D|T]", "[\\*|\\#]"};
+
+    //     for(int i = 0 ; i < 3; i++){
+    //         Pattern pattern = Pattern.compile(reg[i]);
+    //         Matcher matcher = pattern.matcher(dartResult);
+    //         System.out.println("Test : " + matcher.group());
+    //     }
+
+    //     return 0;
+    // }
 }
