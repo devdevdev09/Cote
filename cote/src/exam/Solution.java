@@ -181,4 +181,15 @@ public class Solution {
         System.out.println("answer : " + (result[0] + result[1] + result[2]));
         return 0;
     }
+
+    public int solution4(String dartResult){
+        Pattern pattern = Pattern.compile("[0-9]{1,2}[S|D|T]{1}[\\*|\\#]{0,1}");
+        Matcher matcher = pattern.matcher(dartResult);
+
+        // while(matcher.matches()){
+        //     System.out.println("str : " + matcher.);
+
+        // }
+        return 0;
+    }
 }
