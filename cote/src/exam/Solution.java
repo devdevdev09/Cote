@@ -144,15 +144,10 @@ public class Solution {
         String[] num = dartResult.split("[^0-9]{1,2}");
         int[] result = new int[num.length];
 
-        for(String n : num){
-            System.out.println("n : " + n);
-        }
-
         // replace("문자열"), replaceAll("정규식");
         String[] bonus = dartResult.replaceFirst("[0-9]{1,2}", "").split("[0-9]{1,2}");
 
         for(int i=0; i < bonus.length; i++){
-            
             char[] cArr = bonus[i].toCharArray();
 
             for(int j = 0; j < cArr.length; j++){
