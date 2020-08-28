@@ -1,4 +1,4 @@
-# Programmers
+# Cote
 - Coding Test
 
 ### TODO
