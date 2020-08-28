@@ -140,15 +140,50 @@ public class Solution {
     }
 
     
-    // public int solution3(String dartResult){
-    //     String[] reg = {"[0-9]{1,2}", "[S|D|T]", "[\\*|\\#]"};
+    public int solution3(String dartResult){
+        String[] num = dartResult.split("[^0-9]{1,2}");
+        int[] result = new int[num.length];
 
-    //     for(int i = 0 ; i < 3; i++){
-    //         Pattern pattern = Pattern.compile(reg[i]);
-    //         Matcher matcher = pattern.matcher(dartResult);
-    //         System.out.println("Test : " + matcher.group());
-    //     }
+        for(String n : num){
+            System.out.println("n : " + n);
+        }
 
-    //     return 0;
-    // }
+        // replace("문자열"), replaceAll("정규식");
+        String[] bonus = dartResult.replaceFirst("[0-9]{1,2}", "").split("[0-9]{1,2}");
+
+        for(int i=0; i < bonus.length; i++){
+            
+            char[] cArr = bonus[i].toCharArray();
+
+            for(int j = 0; j < cArr.length; j++){
+                if('S' == cArr[j]){
+                    result[i] = (int)Math.pow(Integer.parseInt(num[i]),1);
+                }
+
+                if('D' == cArr[j]){
+                    result[i] = (int)Math.pow(Integer.parseInt(num[i]),2);
+                }
+
+                if('T' == cArr[j]){
+                    result[i] = (int)Math.pow(Integer.parseInt(num[i]),3);
+                }
+
+                if('*' == cArr[j]){
+                    if(i==0){
+                        result[i] = result[i] * 2;
+                    }else{
+                        result[i-1] = result[i-1] * 2;
+                        result[i] = result[i] * 2;
+                    }
+                }
+
+                if('#' == cArr[j]){
+                    result[i] = result[i] * -1;
+                }
+            }
+        }
+        
+        System.out.println("answer : " + (result[0] + result[1] + result[2]));
+        return 0;
+    }
 }
