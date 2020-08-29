@@ -9,23 +9,31 @@ public class Solution0828 {
             return "";
         }
 
-        String[] sArr = splitUV(p);
-        
-        String u = sArr[0];
-        String v = sArr[0];
-
-        if(isCorrect(u)){
-            answer += u + solution(v);
-        }else{
-            answer = solution(v);
-            answer = fn3(answer);
+        if(isCorrect(p)){
+            return p;
         }
+
+        answer = testAll(p);
 
         return answer;
     }
 
-    // 올바른 괄화문자열인지 확인
-    // 문자열을 u,v로 분리
+    public String testAll(String p){
+        if(p.equals("")){
+            return "";
+        }
+
+        String[] sArr = splitUV(p);
+        
+        String u = sArr[0];
+        String v = sArr[1];
+
+        if(isCorrect(u)){
+            return u + testAll(v);
+        }else{
+            return "(" + testAll(v)+ ")" +  fn3(u);
+        }
+    }
 
     public boolean isCorrect(String s){        
         int left = 0;
@@ -69,11 +77,28 @@ public class Solution0828 {
 
         String str = s.substring(1, len-1);
         String revers = "";
-        
-        for(int i = str.length() - 1 ; i > 0 ; i--){
-            revers += Character.toString(str.charAt(i));
+
+        for(char c : str.toCharArray()){
+            char tmp;
+            if(c == '('){
+                tmp = ')';
+            }else{
+                tmp = '(';
+            }
+            revers += Character.toString(tmp);
         }
 
         return revers;
+    }
+
+    public String revers(String s){
+        char[] a = s.toCharArray();
+        String temp = "";
+        
+        for(int i = a.length; i > 0; i--){
+            temp += Character.toString(a[i]);
+        }
+
+        return temp;
     }
 }

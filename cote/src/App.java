@@ -9,8 +9,13 @@ public class App {
 
         
         Solution0828 sol0828 = new Solution0828();
-        sol0828.solution("(()())()");
-        sol0828.solution(")(");
-        sol0828.solution("()))((()");
+        String result = "";
+        // result = sol0828.solution("(()())()");
+        // result = sol0828.solution(")(");
+        // result = sol0828.solution("()))((()");
+        result = sol0828.solution("()))((");
+        
+
+        System.out.println("resut : " + result);
     }
 }
