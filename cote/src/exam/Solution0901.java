@@ -34,14 +34,15 @@ public class Solution0901 {
     }
 
     public int[] toArray(List<Integer> list){
-        int[] arr = new int[list.size()];
-        int idx = 0;
+        // int[] arr = new int[list.size()];
+        // int idx = 0;
         
-        for(Integer num : list){
-            arr[idx++] = num;
-        }
+        // for(Integer num : list){
+        //     arr[idx++] = num;
+        // }
 
-        return arr;
+        //return list.toArray(new int[list.size()]);
+        return list.stream().mapToInt(i->i).toArray();
     }
 
     public List init(List list){
