@@ -11,18 +11,14 @@ public class Solution0901_2 {
     }
 
     public int solution(String s){
-        if(s.length() == 1){
-            return 1;
-        }
+        if(s.length() == 1) return 1;
         int min = 9999;
 
         for(int i = 1 ; i < s.length(); i++){
             String[] arr = getArrByNum(s, i);    
             int cnt = getPressCount(arr);
 
-            if(min > cnt && cnt > 0){
-                min = cnt;
-            }
+            if(min > cnt && cnt > 0) min = cnt;
         }
 
         return min;
@@ -36,12 +32,7 @@ public class Solution0901_2 {
            if(arr[i].equals(arr[i+1])){
                 cnt++;
            }else{
-                if(cnt == 1){
-                    result += arr[i];
-                }else{
-                    result += Integer.toString(cnt) + arr[i];
-                }
-                
+                result += (cnt == 1) ? arr[i] : Integer.toString(cnt) + arr[i];
                 cnt = 1;
            }
 
@@ -49,28 +40,19 @@ public class Solution0901_2 {
                 if(arr[i].equals(arr[i+1])){
                     result += Integer.toString(cnt) + arr[i];
                 }else{
-                    if(cnt == 1){
-                        result += arr[i+1];
-                    }else{
-                        result += Integer.toString(cnt) + arr[i+1];
-                    }
+                    result += (cnt == 1) ? arr[i+1] : Integer.toString(cnt) + arr[i+1];
                 }
            }
         }
 
-        int count = result.length();
-        return count;
+        return result.length();
     }
 
     public String[] getArrByNum(String s, int num){
-         int SIZE = 0;
+        int SIZE = 0;
         int len = s.length();
 
-        if(len%num == 0){
-            SIZE = len/num;
-        }else{
-            SIZE = len/num + 1;
-        }
+        SIZE = (len%num == 0) ? len/num : len/num + 1;
 
         String[] result = new String[SIZE];
 
