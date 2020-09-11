@@ -6,8 +6,8 @@ public class Solution0901_2 {
         Solution0901_2 solution = new Solution0901_2();
 
         String[][] tcArr = {
-            {"aabbaccc", "7"},
             {"ababcdcdababcdcd", "9"},
+            {"aabbaccc", "7"},
             {"abcabcdede", "8"},
             {"abcabcabcabcdededededede", "14"},
             {"xababcdcdababcdcd", "17"}
@@ -43,16 +43,32 @@ public class Solution0901_2 {
         int min = 9999;
 
         for(int i = 1 ; i < s.length(); i++){
-            String[] arr = getArrByNum(s, i);    
-            int cnt = getPressCount(arr);
+            int cnt = getPressCount(s,0,1,i,1).length();
 
-            if(min > cnt && cnt > 0) min = cnt;
+            if(min > cnt) min = cnt;
         }
 
         return min;
     }
 
-    public int getPressCount(String[] arr){
+    public String getPressCount(String str, int peek, int next, int devide, int count){
+        int currend = (peek*devide + devide > str.length()) ? str.length() : peek*devide + devide;
+        String currStr = str.substring(peek*devide, currend);
+        
+        if(next > str.length()/devide){
+            return String.valueOf(count == 1 ? "" : count) + currStr;
+        }else{
+            int nextEnd = (peek*devide + 2*devide > str.length())? str.length() :peek*devide + 2*devide;
+            String nextStr = str.substring(peek*devide + devide, nextEnd);
+            if(currStr.equals(nextStr)){
+                return getPressCount(str, ++peek, ++next, devide, ++count);
+            }else{
+                return String.valueOf(count == 1 ? "" : count) + currStr + getPressCount(str, ++peek, ++next, devide, 1);
+            }
+        }
+    }
+
+    public int getPressCount(String[] arr, int peek, int next){
         int cnt = 1;
         String result = "";
         
