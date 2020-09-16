@@ -2,7 +2,11 @@ package exam.s0915_2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 class TestCase {
    String[] words;
@@ -18,7 +22,6 @@ public class Solution {
         tc1.words = new String[]{"frodo", "front", "frost", "frozen", "frame", "kakao"};
         tc1.queries = new String[]{"fro??", "????o", "fr???", "fro???", "pro?"};
         tc1.result = new int[]{3, 2, 4, 1, 0};
-                            //[4, 2, 5, 1, 0]
 
         List<TestCase> testList = new ArrayList<>();
         testList.add(tc1);
@@ -27,7 +30,6 @@ public class Solution {
             int[] result = sol.solution(tc.words, tc.queries);
 
             if(Arrays.equals(result, tc.result)){
-                // word : front query : fro??
                 System.out.println("success");
             }else{
                 System.out.println("fail");
@@ -36,45 +38,41 @@ public class Solution {
     }
 
     public int[] solution(String[] words, String[] queries) {
-        int[] answer = new int[queries.length];
+        Map<String,Object> map = new HashMap<String,Object>();
+        List<String> list = new ArrayList<String>(Arrays.asList(queries));
+        Arrays.sort(words);
+        Integer[] arr = list.parallelStream().map(s->match2(s,words, map)).toArray(Integer[]::new);
 
-        for(int i = 0; i < queries.length; i++){
-            String query = queries[i];
-            int cnt = 0;
-
-            for(int j = 0 ; j < words.length; j++){
-                String word = words[j];
-                if(query.length() != word.length()) continue;
-
-                if(matchTest(word, query)){
-                    cnt++;
-                }
-            }
-            answer[i] = cnt;
-            cnt = 0;
-        }
-
-        return answer;
+        return Arrays.stream(arr).mapToInt(i->i).toArray();
     }
 
-    public boolean matchTest(String s2, String s1){
-        String[] arr1 = s1.split("");
-        String[] arr2 = s2.split("");
+    public int match2(String query, String[] words, Map<String, Object> map){
+        if(map.containsKey(query)){return (int)map.get(query);}
+        int first = query.indexOf("?");
+        int last = query.lastIndexOf("?");
+        int cnt = 0;
+        String s1 = query.replaceAll("\\?", "");
 
-        try{
-            for(int i = 0 ; i < arr1.length; i++){
-                if(arr1[i].equals("?")) continue;
-                
-                if(arr1[i].equals(arr2[i])){
-                    continue;
-                }else{
-                    return false;
-                }
+        for(int i = 0; i < words.length; i++){
+            if(query.length() != words[i].length()) continue;
+            if(matchTest(words[i], s1, first, last)){
+                cnt++;
             }
-        }catch(Exception e){
-            return false;
         }
 
-        return true;
+        map.put(query, cnt);
+
+        return cnt;
     }
+
+    public boolean matchTest(String s2, String s1, int first, int last){
+        if(first > 0){
+            s2 = s2.substring(0, first);
+        }else{
+            s2 = s2.substring(last+1);
+        }
+        
+        return s1.equals(s2);
+    }
+    
 }
