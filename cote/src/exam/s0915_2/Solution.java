@@ -2,7 +2,11 @@ package exam.s0915_2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 class TestCase {
    String[] words;
@@ -15,7 +19,7 @@ public class Solution {
         Solution sol = new Solution();
 
         TestCase tc1 = new TestCase();
-        tc1.words = new String[]{"frodo", "fron", "frost", "frozen", "frame", "kakao"};
+        tc1.words = new String[]{"frodo", "front", "frost", "frozen", "frame", "kakao"};
         tc1.queries = new String[]{"fro??", "????o", "fr???", "fro???", "pro?"};
         tc1.result = new int[]{3, 2, 4, 1, 0};
 
@@ -34,29 +38,42 @@ public class Solution {
     }
 
     public int[] solution(String[] words, String[] queries) {
-        int[] answer = new int[queries.length];
+        List<String> list = new ArrayList<String>(Arrays.asList(queries));
+        Integer[] arr = list.parallelStream().map(s->match2(s,words)).toArray(Integer[]::new);
 
-        for(int i = 0; i < queries.length; i++){
-            String query = queries[i];
-            int cnt = 0;
-            // int first = query.indexOf("?");
-            // int last = query.lastIndexOf("?");
-            
-            // int position = (first > 0) ? 1 : -1;
+        return Arrays.stream(arr).mapToInt(i->i).toArray();
+    }
 
-            for(int j = 0 ; j < words.length; j++){
-                String word = words[i];
-                if(query.length() != word.length()) break;
+    Map<String, Integer> map = new HashMap<String, Integer>();
+    public int match2(String query, String[] words){
+        if(map.containsKey(query)){return map.get(query);}    
+        int first = query.indexOf("?");
+        int last = query.lastIndexOf("?");
+        int cnt = 0;
+        String s1 = query.replaceAll("\\?", "");
+        int qLen = query.length();
+        
+        String[] a = Arrays.stream(words).filter(s->qLen == s.length()).toArray(String[]::new);
 
-                if(query.equals(word)){ // todo::상세 비교
-                    cnt++;
-                }
-
+        for(String word : a){
+            if(matchTest(word, s1, first, last)){
+                cnt++;
             }
-            answer[i] = cnt;
-            cnt = 0;
         }
 
-        return answer;
+        map.put(query, cnt);
+
+        return cnt;
     }
+
+    public boolean matchTest(String s2, String s1, int first, int last){
+        if(first > 0){
+            s2 = s2.substring(0, first);
+        }else{
+            s2 = s2.substring(last+1);
+        }
+        
+        return s1.indexOf(s2) > -1 ? true : false;
+    }
+    
 }
