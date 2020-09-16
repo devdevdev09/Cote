@@ -38,24 +38,25 @@ public class Solution {
     }
 
     public int[] solution(String[] words, String[] queries) {
-        Map<String,Object> map = new HashMap<String,Object>();
         List<String> list = new ArrayList<String>(Arrays.asList(queries));
-        Arrays.sort(words);
-        Integer[] arr = list.parallelStream().map(s->match2(s,words, map)).toArray(Integer[]::new);
+        Integer[] arr = list.parallelStream().map(s->match2(s,words)).toArray(Integer[]::new);
 
         return Arrays.stream(arr).mapToInt(i->i).toArray();
     }
 
-    public int match2(String query, String[] words, Map<String, Object> map){
-        if(map.containsKey(query)){return (int)map.get(query);}
+    Map<String, Integer> map = new HashMap<String, Integer>();
+    public int match2(String query, String[] words){
+        if(map.containsKey(query)){return map.get(query);}    
         int first = query.indexOf("?");
         int last = query.lastIndexOf("?");
         int cnt = 0;
         String s1 = query.replaceAll("\\?", "");
+        int qLen = query.length();
+        
+        String[] a = Arrays.stream(words).filter(s->qLen == s.length()).toArray(String[]::new);
 
-        for(int i = 0; i < words.length; i++){
-            if(query.length() != words[i].length()) continue;
-            if(matchTest(words[i], s1, first, last)){
+        for(String word : a){
+            if(matchTest(word, s1, first, last)){
                 cnt++;
             }
         }
@@ -72,7 +73,7 @@ public class Solution {
             s2 = s2.substring(last+1);
         }
         
-        return s1.equals(s2);
+        return s1.indexOf(s2) > -1 ? true : false;
     }
     
 }
