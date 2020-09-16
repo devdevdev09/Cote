@@ -15,9 +15,10 @@ public class Solution {
         Solution sol = new Solution();
 
         TestCase tc1 = new TestCase();
-        tc1.words = new String[]{"frodo", "fron", "frost", "frozen", "frame", "kakao"};
+        tc1.words = new String[]{"frodo", "front", "frost", "frozen", "frame", "kakao"};
         tc1.queries = new String[]{"fro??", "????o", "fr???", "fro???", "pro?"};
         tc1.result = new int[]{3, 2, 4, 1, 0};
+                            //[4, 2, 5, 1, 0]
 
         List<TestCase> testList = new ArrayList<>();
         testList.add(tc1);
@@ -26,6 +27,7 @@ public class Solution {
             int[] result = sol.solution(tc.words, tc.queries);
 
             if(Arrays.equals(result, tc.result)){
+                // word : front query : fro??
                 System.out.println("success");
             }else{
                 System.out.println("fail");
@@ -39,24 +41,40 @@ public class Solution {
         for(int i = 0; i < queries.length; i++){
             String query = queries[i];
             int cnt = 0;
-            // int first = query.indexOf("?");
-            // int last = query.lastIndexOf("?");
-            
-            // int position = (first > 0) ? 1 : -1;
 
             for(int j = 0 ; j < words.length; j++){
-                String word = words[i];
-                if(query.length() != word.length()) break;
+                String word = words[j];
+                if(query.length() != word.length()) continue;
 
-                if(query.equals(word)){ // todo::상세 비교
+                if(matchTest(word, query)){
                     cnt++;
                 }
-
             }
             answer[i] = cnt;
             cnt = 0;
         }
 
         return answer;
+    }
+
+    public boolean matchTest(String s2, String s1){
+        String[] arr1 = s1.split("");
+        String[] arr2 = s2.split("");
+
+        try{
+            for(int i = 0 ; i < arr1.length; i++){
+                if(arr1[i].equals("?")) continue;
+                
+                if(arr1[i].equals(arr2[i])){
+                    continue;
+                }else{
+                    return false;
+                }
+            }
+        }catch(Exception e){
+            return false;
+        }
+
+        return true;
     }
 }
