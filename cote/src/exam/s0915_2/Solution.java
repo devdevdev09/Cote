@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 class TestCase {
    String[] words;
@@ -24,7 +26,31 @@ public class Solution {
         tc1.result = new int[]{3, 2, 4, 1, 0};
 
         List<TestCase> testList = new ArrayList<>();
-        testList.add(tc1);
+
+        String s = String.join(",", tc1.words);
+        s = "," + s;
+
+        int idx = 0;
+
+        int[] answer = new int[tc1.queries.length];
+        for(String query : tc1.queries){
+            int first = query.indexOf("?");
+            int last = query.lastIndexOf("?");
+            int term = last + 1 -first;
+            String str = query.replaceAll("\\?", "");
+
+            String temp = "";
+            if(first > 0){
+                temp = s.replaceAll(str + "[a-z]{" + term + "}","1");
+            }else{
+                temp = s.replaceAll("[a-z]{" + term + "}" + str,"1");
+            }
+            
+            answer[idx++] = (int)Arrays.stream(temp.split(",")).filter(st->st.length()==1).count();
+        }
+        
+        System.out.println(s);
+        //testList.add(tc1);
 
         for(TestCase tc : testList){
             int[] result = sol.solution(tc.words, tc.queries);
@@ -47,22 +73,27 @@ public class Solution {
     Map<String, Integer> map = new HashMap<String, Integer>();
     public int match2(String query, String[] words){
         if(map.containsKey(query)){return map.get(query);}    
-        int first = query.indexOf("?");
-        int last = query.lastIndexOf("?");
         int cnt = 0;
         String s1 = query.replaceAll("\\?", "");
         int qLen = query.length();
         
         String[] a = Arrays.stream(words).filter(s->qLen == s.length()).toArray(String[]::new);
 
+        Pattern pattern = Pattern.compile("[a-z]{1," + qLen + "}");
+        
         for(String word : a){
+            Matcher matcher = pattern.matcher(word);
             if(s1.equals("")){
                 cnt = a.length;
                 break;
             }
-            if(matchTest(word, s1, first, last)){
+
+            if(matcher.matches()){
                 cnt++;
             }
+            // if(matchTest(word, s1, first, last)){
+            //     cnt++;
+            // }
         }
 
         map.put(query, cnt);
