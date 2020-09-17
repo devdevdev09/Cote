@@ -56,6 +56,10 @@ public class Solution {
         String[] a = Arrays.stream(words).filter(s->qLen == s.length()).toArray(String[]::new);
 
         for(String word : a){
+            if(s1.equals("")){
+                cnt = a.length;
+                break;
+            }
             if(matchTest(word, s1, first, last)){
                 cnt++;
             }
@@ -68,12 +72,12 @@ public class Solution {
 
     public boolean matchTest(String s2, String s1, int first, int last){
         if(first > 0){
-            s2 = s2.substring(0, first);
+            s2 = s2.subSequence(0, first).toString();
         }else{
-            s2 = s2.substring(last+1);
+            s2 = s2.subSequence(last+1, s2.length()).toString();
         }
         
-        return s1.indexOf(s2) > -1 ? true : false;
+        return s1.equals(s2);
     }
     
 }
