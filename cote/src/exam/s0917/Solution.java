@@ -23,22 +23,8 @@ public class Solution {
     }
 
     public int solution(String s) {
-        String[] sArr = Arrays.stream(s.split("")).distinct().toArray(String[]::new);
+        int answer = 0;
 
-        String tmp = s;
-        while(!tmp.equals("")) {
-            String pre = "";
-
-            for(int i = 0; i < sArr.length; i++) {
-                pre = tmp;
-                tmp = pre.replaceAll("[" + sArr[i] + "]{2}", "");
-                if(tmp.length() == 0) return 1;
-            }
-            if(pre.equals(tmp)) return 0;
-            if(tmp.equals(s)) return 0;
-        }
-
-        if(tmp.length() == 0) return 1;
-        else return 0;
+        return answer;
     }
 }
