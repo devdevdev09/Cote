@@ -35,7 +35,18 @@ public class Solution {
                     continue;
                 }else{
                     board[j][moves[i]] = 0;
-                    stack.add(temp);
+                    
+                    if(stack.empty()){
+                        stack.add(temp);
+                    }else{
+                        int top = stack.peek();
+                        
+                        if(top == temp){
+                            stack.pop();
+                        }else{
+                            stack.add(temp);
+                        }
+                    }
                     break;
                 }
             }
