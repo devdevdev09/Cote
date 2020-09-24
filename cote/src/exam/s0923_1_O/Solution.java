@@ -1,9 +1,7 @@
 package exam.s0923_1_O;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Stack;
 
 public class Solution {
     public static void main(String[] args) {
@@ -16,8 +14,6 @@ public class Solution {
                             {3,5,1,3,1}
                         };
 
-                        // 4,3,1,1,3,2,4;
-
         int[] moves = {1,5,3,5,1,2,1,4};
         int result = 4;
 
@@ -28,7 +24,6 @@ public class Solution {
             System.out.println("fail");
         }
     }
-
 
     public int solution(int[][] board, int[] moves) {
         int answer = 0;
