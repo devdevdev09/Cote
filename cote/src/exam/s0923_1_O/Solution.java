@@ -1,5 +1,8 @@
-package exam.s0923;
+package exam.s0923_1_O;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Stack;
 
 public class Solution {
@@ -13,6 +16,8 @@ public class Solution {
                             {3,5,1,3,1}
                         };
 
+                        // 4,3,1,1,3,2,4;
+
         int[] moves = {1,5,3,5,1,2,1,4};
         int result = 4;
 
@@ -24,34 +29,37 @@ public class Solution {
         }
     }
 
+
     public int solution(int[][] board, int[] moves) {
-        Stack<Integer> stack = new Stack<Integer>();
         int answer = 0;
+        List<Integer> result = new ArrayList<Integer>();
 
         for(int i = 0 ; i < moves.length; i++){
             for(int j = 0; j < board.length; j++){
-                int temp = board[j][moves[i]];
-                if(temp == 0){
+                int row = j;
+                int col = moves[i]-1;
+                int block = board[row][col];
+                
+                if(block == 0){
                     continue;
                 }else{
-                    board[j][moves[i]] = 0;
-                    
-                    if(stack.empty()){
-                        stack.add(temp);
-                    }else{
-                        int top = stack.peek();
-                        
-                        if(top == temp){
-                            stack.pop();
-                        }else{
-                            stack.add(temp);
+                    board[j][moves[i]-1] = 0;
+                    result.add(block);
+
+                    int end = result.size() - 1;
+
+                    if(result.size() > 1){
+                        if(result.get(end) == result.get(end - 1)){
+                            result.remove(end);
+                            result.remove(end-1);
+                            answer +=2;
                         }
                     }
                     break;
                 }
             }
         }
-        
+
         return answer;
     }
 }
