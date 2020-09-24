@@ -1,4 +1,4 @@
-package exam.s0942;
+package exam.s0924_1_O;
 
 import java.util.*;
 
