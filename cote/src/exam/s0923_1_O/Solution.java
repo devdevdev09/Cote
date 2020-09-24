@@ -1,7 +1,6 @@
 package exam.s0923_1_O;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Stack;
 
 public class Solution {
     public static void main(String[] args) {
@@ -27,7 +26,7 @@ public class Solution {
 
     public int solution(int[][] board, int[] moves) {
         int answer = 0;
-        List<Integer> result = new ArrayList<Integer>();
+        Stack<Integer> stack = new Stack<Integer>();
 
         for(int i = 0 ; i < moves.length; i++){
             for(int j = 0; j < board.length; j++){
@@ -39,15 +38,15 @@ public class Solution {
                     continue;
                 }else{
                     board[j][moves[i]-1] = 0;
-                    result.add(block);
 
-                    int end = result.size() - 1;
-
-                    if(result.size() > 1){
-                        if(result.get(end) == result.get(end - 1)){
-                            result.remove(end);
-                            result.remove(end-1);
-                            answer +=2;
+                    if(stack.isEmpty()){
+                        stack.push(block);
+                    }else{
+                        if(stack.peek() == block){
+                            stack.pop();
+                            answer += 2;
+                        }else{
+                            stack.push(block);
                         }
                     }
                     break;
