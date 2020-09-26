@@ -26,7 +26,6 @@ public class Solution3 {
         int answer = 0;
         return answer;
     }
-
 }
 
 class Bridge{
