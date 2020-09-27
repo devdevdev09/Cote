@@ -6,19 +6,23 @@ import java.util.List;
 public class Solution3 {
     public static void main(String[] args) {
         Solution3 sol = new Solution3();
-        // 2	10	[7,4,5,6]	                    8
-        // 100	100	[10]	                        101
-        // 100	100	[10,10,10,10,10,10,10,10,10,10]	110
         
-        int bridge_length = 2;
-        int weight = 10;
-        int[] truck_weights = {7,4,5,6};
-        int result = 8;
+        int[] bridge_length = {2,100,100};
+        int[] weight = {10, 100, 100};
+        int[][] truck_weights = {
+                                    {7,4,5,6},
+                                    {10},
+                                    {10,10,10,10,10,10,10,10,10,10}
+                                };
 
-        if(result == sol.solution(bridge_length, weight, truck_weights)){
-            System.out.println("success");
-        }else{
-            System.out.println("fail");
+        int[] result = {8, 101, 110};
+
+        for(int i = 0 ; i < bridge_length.length; i++){
+            if(result[i] == sol.solution(bridge_length[i], weight[i], truck_weights[i])){
+                System.out.println("success");
+            }else{
+                System.out.println("fail");
+            }
         }
     }
 
