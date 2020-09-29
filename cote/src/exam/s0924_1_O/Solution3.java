@@ -1,8 +1,5 @@
 package exam.s0924_1_O;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Solution3 {
     public static void main(String[] args) {
         Solution3 sol = new Solution3();
@@ -32,35 +29,3 @@ public class Solution3 {
     }
 }
 
-class Bridge{
-    int weight = 0;
-    boolean isFull = false;
-    List<Truck> list = new ArrayList<Truck>();
-}
-
-class Truck{
-    final int SPEED = 1;
-
-    boolean isEnd   = false;
-    boolean isStart = false;
-    int goal = 0;
-    int weight = 0;
-    int current = 0;
-
-    public Truck(int goal, int weight){
-        this.goal = goal;
-        this.weight = weight;
-    }
-
-    public void move(){
-        current += SPEED;
-    }
-
-    public boolean check(int goal){
-        if(goal < current){
-            return true;
-        }else{
-            return false;
-        }
-    }
-}
