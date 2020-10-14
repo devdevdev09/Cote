@@ -1,6 +1,7 @@
 package exam.basic.optional;
 
-import java.lang.StackWalker.Option;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 public class OptionalExam {
@@ -10,20 +11,16 @@ public class OptionalExam {
     }
 
     public void oe1(){
-        Optional<String> opt = Optional.of("java 옵셔날 object");
-        System.out.println(opt);;
+        Optional<String> op1 = Optional.empty();
 
-        Optional<String> opt2 = Optional.ofNullable("java 옵셔널 object");
+        Optional<String> op2 = Optional.of("OP2");
 
-        if(opt2.isPresent()){
-            System.out.println(opt2.get());
-        }
+        Optional<String> op3 = Optional.ofNullable("OP3");
 
-        Optional opt3 = Optional.empty();
+        Optional<String> op4 = Optional.ofNullable(null);
+    }
 
-        System.out.println("opt3");
-        System.out.println(opt3);
-
-        System.out.println();
+    public void oe2(String param){
+        String str = Optional.ofNullable(param).orElse("OTHER");
     }
 }
