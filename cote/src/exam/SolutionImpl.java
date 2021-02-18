@@ -28,13 +28,11 @@ public class SolutionImpl implements Solution{
         }
 
     }
-    
 }
 
 class Solv {
     public int solution(int[] scoville, int K) {
         int answer = 0;
-        int[] arr3 = scoville;
         
         List<Integer> list = convert(scoville);
         list = sort(list);
@@ -44,17 +42,15 @@ class Solv {
             list = getMinSco3(list);
 
             ++answer;
-            
             int num = sumScovile(arr1[0], arr1[1]);
-            arr3 = null;
-            list = concat(list, num);            
+            list = concat(list, num);      
+                        
+            if(list.size() == 1 && num <= K)
+                return -1;
             
             boolean result = check(list, K);
-            if(result)
+            if(!result)
                 return answer;
-            
-            if(list.size() == 1 && result)
-                return -1;
         }
     }
     
@@ -68,16 +64,15 @@ class Solv {
     }
     
     public boolean check(List<Integer> list, int k){
-
         List<Integer> result = new ArrayList<>(); 
         result.addAll(list);
         result.removeIf(i->(i>=k));
         
         if(result.size() == 0){
+            return false;
+        }else{
             return true;
         }
-        
-        return false;
     }
     
     
