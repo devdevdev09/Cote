@@ -1,19 +1,12 @@
 package exam;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.stream.Collectors;
 
 public class SolutionImpl implements Solution{
 
     @Override
     public void test() {
-
 
     }
 
@@ -37,7 +30,7 @@ class Solv {
     public int solution(int[] scoville, int K) {
         int answer = 0;
         
-        Queue list = new PriorityQueue<>();
+        Queue<Integer> list = new PriorityQueue<>();
 
         for(int n : scoville){
             list.add(n);
@@ -46,17 +39,17 @@ class Solv {
         while(!list.isEmpty()){
             ++answer;
 
-            int num1 = (int)list.poll();
-            int num2 = (int)list.poll();
+            int num1 = list.poll();
+            int num2 = list.poll();
 
             int sum = num1 + (num2*2);
             list.add(sum);
 
-            if((int)list.peek() >= K){
+            if(list.peek() >= K){
                 return answer;
             }
 
-            if(list.size() == 1 && (int)list.peek() < K){
+            if(list.size() == 1 && list.peek() < K){
                 return -1;
             }
         }
