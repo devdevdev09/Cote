@@ -1,7 +1,5 @@
-package exam.basic.optional;
+package com.exam.basic.optional;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 public class OptionalExam {

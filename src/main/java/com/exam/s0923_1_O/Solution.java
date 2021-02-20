@@ -1,4 +1,4 @@
-package exam.s0923_1_O;
+package com.exam.s0923_1_O;
 
 import java.util.Stack;
 

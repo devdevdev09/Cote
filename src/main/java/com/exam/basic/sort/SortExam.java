@@ -1,4 +1,4 @@
-package exam.basic.sort;
+package com.exam.basic.sort;
 
 import java.util.Arrays;
 import java.util.Comparator;

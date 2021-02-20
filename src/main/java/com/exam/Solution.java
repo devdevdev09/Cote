@@ -1,4 +1,4 @@
-package exam;
+package com.exam;
 
 public interface Solution {
     void test();

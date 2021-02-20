@@ -1,4 +1,4 @@
-package exam;
+package com.exam;
 
 public class Solution0901_2 {
 

@@ -1,4 +1,4 @@
-package exam.s0915_2;
+package com.exam.s0915_2;
 
 import java.util.ArrayList;
 import java.util.Arrays;

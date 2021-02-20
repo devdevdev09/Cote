@@ -1,4 +1,4 @@
-package exam.basic.time;
+package com.exam.basic.time;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;

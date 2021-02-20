@@ -1,8 +1,4 @@
-package exam.basic.lambda;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
+package com.exam.basic.lambda;
 
 public class LambdaExam {
     public static void main(String[] args) {

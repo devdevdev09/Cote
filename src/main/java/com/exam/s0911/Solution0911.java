@@ -1,4 +1,4 @@
-package exam.s0911;
+package com.exam.s0911;
 
 import java.util.ArrayList;
 import java.util.Arrays;

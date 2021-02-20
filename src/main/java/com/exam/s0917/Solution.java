@@ -1,4 +1,4 @@
-package exam.s0917;
+package com.exam.s0917;
 
 import java.util.Arrays;
 
