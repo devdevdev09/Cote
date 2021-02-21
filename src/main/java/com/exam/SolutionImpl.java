@@ -7,7 +7,8 @@ public class SolutionImpl implements Solution{
 
     @Override
     public void test() {
-
+        test1(new int[]{1,2,3}, "test");
+        test1(new int[]{1,2,3}, "test", 3);
     }
 
     @Override
@@ -22,6 +23,12 @@ public class SolutionImpl implements Solution{
         }else{
             System.out.println("fail : " + exp);
         }
+
+    }
+
+    @Override
+    public void test1(Object... args) {
+        // TODO Auto-generated method stub
 
     }
 }
