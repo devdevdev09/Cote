@@ -1,5 +1,10 @@
 package com.exam;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -9,6 +14,29 @@ public class SolutionImpl implements Solution{
     public void test() {
         test1(new int[]{1,2,3}, "test");
         test1(new int[]{1,2,3}, "test", 3);
+
+        List<Integer> list = new ArrayList<Integer>();
+        list.add(1);
+        list.add(2);
+        list.forEach(i->{
+            System.out.println("i :" + i);
+        });
+
+        list.forEach(System.out::println);
+
+        Map<Integer, String> map = new HashMap<Integer, String>();
+        map.put(0, "one");
+        map.put(1, "two");
+
+        map.forEach((k,v)->{
+            System.out.println(k + " : " + v);
+        });
+
+        int[] arr = {1,2,3};
+        Arrays.stream(arr).forEach(i->{
+            System.out.println(" i : " + i);
+        });
+        
     }
 
     @Override

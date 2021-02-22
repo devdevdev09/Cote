@@ -1,5 +1,8 @@
 package com.code.solv;
 
+import com.exam.Solution;
+import com.exam.SolutionImpl;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,7 +10,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SolvApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SolvApplication.class, args);
+		Solution sol = new SolutionImpl();
+		sol.test();
+		//SpringApplication.run(SolvApplication.class, args);
 	}
 
 }
